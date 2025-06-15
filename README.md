@@ -1,8 +1,16 @@
 # 📘 Track My Degree
 
-**Track My Degree** is a modern, Flutter-based mobile application developed by **JD Tech Sage** to help college students manage and streamline their academic life. From subjects and assignments to timetables and backlogs, everything is neatly organized in one place with a clean, responsive, and user-friendly interface.
+**Track My Degree** is a modern, Flutter-based mobile application developed to help college students manage and streamline their academic life. From subjects and assignments to timetables and backlogs, everything is neatly organized in one place with a clean, responsive, and user-friendly interface.
 
 ![Dashboard Screenshot](assets/screenshots/dashboard.jpg)
+
+---
+
+## 🔽 Download
+
+Grab the latest build of **Track My Degree**:
+
+👉 [Download APK (v1.0.0)](https://drive.google.com/file/d/1ThiNW3wqG1CaLjMH-ZQEGlXA2l86DKzO/view?usp=sharing)
 
 ---
 
@@ -81,22 +89,3 @@
 | Unique IDs       | uuid                                          |
 | Permissions      | permission_handler                            |
 | Branding         | flutter_launcher_icons, flutter_native_splash |
-
----
-
-## ⚙️ Setup Instructions
-
-### 🔧 Prerequisites
-
-- Flutter SDK (v3.3.0+)
-- Dart SDK (v3.0.0+)
-- Android Studio/Xcode
-- Git installed
-
-### 📦 Installation
-
-```bash
-git clone https://github.com/your-username/track-my-degree.git
-cd track-my-degree
-flutter pub get
-```
