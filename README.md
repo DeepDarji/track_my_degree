@@ -1,25 +1,102 @@
-# Track my Degree
+# 📘 Track My Degree
 
-A Flutter-based mobile app designed to help college students manage their academic journey with ease. Track your subjects, assignments, timetable, and backlogs, all in one place, with a clean, elegant, and user-friendly interface. Built with a focus on simplicity and productivity, **Track my Degree** empowers students to stay organized and succeed academically.
+**Track My Degree** is a modern, Flutter-based mobile application developed by **JD Tech Sage** to help college students manage and streamline their academic life. From subjects and assignments to timetables and backlogs, everything is neatly organized in one place with a clean, responsive, and user-friendly interface.
 
-![App Screenshot](assets/screenshots/dashboard.png)
+![Dashboard Screenshot](assets/screenshots/dashboard.jpg)
 
-## Features
+---
 
-- **Dashboard**: Get a quick overview of your subjects, pending assignments, and backlogs with interactive stats.
-- **Subjects**: Manage your subjects, track credits, attendance, marks, and backlog status.
-- **Assignments**: Add, track, and mark assignments as complete, with due date reminders via notifications.
-- **Timetable**: Plan your weekly schedule with a clear view of class times.
-- **Settings**:
-  - Toggle notifications for assignment reminders.
-  - Export subjects and assignments to CSV for backups or analysis.
-  - Switch between light and dark themes for a personalized experience.
-- **Backlog Editing**: Easily mark/unmark subjects as backlogs directly from the dashboard.
-- **Branding**: Custom app icon and splash screen with a professional design.
-- **Cross-Platform**: Runs seamlessly on Android and iOS.
+## ✨ Features
 
-## Screenshots
+- **📊 Dashboard**: View academic stats and recent subjects at a glance.
+- **📚 Subjects**: Track attendance, credits, marks, and backlog status.
+- **📝 Assignments**: Create, track, and complete assignments with reminders.
+- **📅 Timetable**: Organize your weekly schedule.
+- **⚙️ Settings**:
+  - Toggle reminders
+  - Export data to CSV
+  - Switch themes (Light/Dark)
+- **📦 Data Export**: Save subject and assignment data offline.
+- **🌙 Theming**: Light & Dark mode support.
+- **📱 Cross-Platform**: Works on Android & iOS.
+- **🎨 Custom Branding**: Splash screen and app icon with a modern academic design.
+
+---
+
+## 📸 Screenshots
 
 | Dashboard                                      | Subjects                                     | Assignments                                        | Settings                                     |
 | ---------------------------------------------- | -------------------------------------------- | -------------------------------------------------- | -------------------------------------------- |
 | ![Dashboard](assets/screenshots/dashboard.jpg) | ![Subjects](assets/screenshots/subjects.jpg) | ![Assignments](assets/screenshots/assignments.jpg) | ![Settings](assets/screenshots/settings.jpg) |
+
+---
+
+## 🧠 Architecture
+
+### 📂 Data Layer
+
+- **SQLite** via `sqflite` for persistent local storage
+- Tables: `subjects`, `assignments`, `timetable`
+- Managed by `DbService` (`services/db_service.dart`)
+
+### 🧩 Models
+
+- `Subject`: ID, name, credits, isBacklog, attendance, marks
+- `Assignment`: ID, subjectId, title, dueDate, isCompleted
+- `TimetableEntry`: ID, subjectId, day, startTime, endTime
+
+### 🧠 State Management
+
+- Powered by `flutter_riverpod`
+- Providers: `subjectProvider`, `assignmentProvider`, `timetableProvider`, `themeProvider`, `notificationsEnabledProvider`
+
+### 🎨 UI/UX
+
+- Reusable widgets: `SubjectCard`, `AssignmentTile`, `ProgressBar`
+- Themes: Defined in `core/theme.dart` with Poppins font, blue/green pastel palette
+- Transitions: `flutter_animate` for smooth animations
+
+### 🔧 Services
+
+- **DbService** – SQLite CRUD operations
+- **NotificationService** – Local alerts via `flutter_local_notifications`
+- **DataExportService** – Export to CSV using `csv` and `path_provider`
+- **Permissions** – Handled with `permission_handler`
+
+---
+
+## 🧰 Tech Stack
+
+| Category         | Technology Used                               |
+| ---------------- | --------------------------------------------- |
+| Framework        | Flutter (Dart)                                |
+| State Management | flutter_riverpod                              |
+| Local Storage    | sqflite                                       |
+| Notifications    | flutter_local_notifications, timezone         |
+| File Handling    | path_provider, csv                            |
+| Fonts            | google_fonts (Poppins)                        |
+| Animations       | flutter_animate                               |
+| Date Formatting  | intl                                          |
+| Charts           | fl_chart                                      |
+| Unique IDs       | uuid                                          |
+| Permissions      | permission_handler                            |
+| Branding         | flutter_launcher_icons, flutter_native_splash |
+
+---
+
+## ⚙️ Setup Instructions
+
+### 🔧 Prerequisites
+
+- Flutter SDK (v3.3.0+)
+- Dart SDK (v3.0.0+)
+- Android Studio/Xcode
+- Git installed
+
+### 📦 Installation
+
+```bash
+git clone https://github.com/your-username/track-my-degree.git
+cd track-my-degree
+flutter pub get
+```
