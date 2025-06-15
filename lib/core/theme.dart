@@ -1,41 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'constants.dart';
 
-final ThemeData appTheme = ThemeData(
-  primaryColor: const Color(0xFF2196F3), // Blue for primary actions
-  colorScheme: const ColorScheme.light(
-    primary: Color(0xFF2196F3),
-    secondary: Color(0xFF4CAF50), // Green for accents
-    surface: Color(0xFFF5F7FA), // Light grey background
-    onPrimary: Colors.white,
-    onSecondary: Colors.white,
-    onSurface: Colors.black87,
-  ),
-  scaffoldBackgroundColor: const Color(0xFFF5F7FA),
-  textTheme: GoogleFonts.poppinsTextTheme(
-    ThemeData.light().textTheme.copyWith(
-      headlineSmall: GoogleFonts.poppins(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-        color: Colors.black87,
-      ),
-      titleLarge: GoogleFonts.poppins(
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-        color: Colors.black87,
-      ),
-      bodyMedium: GoogleFonts.poppins(fontSize: 16, color: Colors.black54),
+ThemeData lightTheme = ThemeData(
+  primaryColor: kPrimaryBlue,
+  scaffoldBackgroundColor: Colors.white,
+  cardTheme: const CardTheme(
+    elevation: 2,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(kCardBorderRadius)),
     ),
   ),
-  cardTheme: CardTheme(
-    elevation: 4,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    color: Colors.white,
+  textTheme: GoogleFonts.poppinsTextTheme().apply(
+    bodyColor: Colors.black87,
+    displayColor: Colors.black87,
   ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: Colors.white,
-    selectedItemColor: Color(0xFF2196F3),
-    unselectedItemColor: Colors.black54,
-    showUnselectedLabels: true,
+  iconTheme: const IconThemeData(color: kPrimaryBlue),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: kPrimaryBlue,
+    foregroundColor: Colors.white,
+  ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: kPrimaryBlue,
+    foregroundColor: Colors.white,
+  ),
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    secondary: kAccentGreen,
+    error: Colors.redAccent,
+  ),
+);
+
+ThemeData darkTheme = ThemeData(
+  primaryColor: kPrimaryBlue,
+  scaffoldBackgroundColor: Colors.grey[900],
+  cardTheme: CardTheme(
+    elevation: 2,
+    color: Colors.grey[800],
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(kCardBorderRadius)),
+    ),
+  ),
+  textTheme: GoogleFonts.poppinsTextTheme().apply(
+    bodyColor: Colors.white70,
+    displayColor: Colors.white70,
+  ),
+  iconTheme: const IconThemeData(color: kAccentGreen),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.grey[800],
+    foregroundColor: Colors.white,
+  ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: kAccentGreen,
+    foregroundColor: Colors.black87,
+  ),
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    secondary: kAccentGreen,
+    error: Colors.redAccent,
+    brightness: Brightness.dark,
   ),
 );

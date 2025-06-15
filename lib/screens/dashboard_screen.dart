@@ -28,7 +28,21 @@ class DashboardScreen extends ConsumerWidget {
                 100;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Track my Degree')),
+      appBar: AppBar(
+        title: const Text('Track my Degree'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Settings',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -77,24 +91,10 @@ class DashboardScreen extends ConsumerWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
-        onTap: (index) {
-          if (index == 0) return;
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder:
-                  (context) =>
-                      [
-                        const DashboardScreen(),
-                        const SubjectsScreen(),
-                        const AssignmentsScreen(),
-                        const TimetableScreen(),
-                        const SettingsScreen(),
-                        const AIScreen(),
-                      ][index],
-            ),
-          );
-        },
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.dashboard),
@@ -115,6 +115,24 @@ class DashboardScreen extends ConsumerWidget {
           ),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'AI Buddy'),
         ],
+        onTap: (index) {
+          if (index == 0) return; // Stay on Dashboard
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder:
+                  (context) =>
+                      [
+                        const DashboardScreen(),
+                        const SubjectsScreen(),
+                        const AssignmentsScreen(),
+                        const TimetableScreen(),
+                        const SettingsScreen(),
+                        const AIScreen(),
+                      ][index],
+            ),
+          );
+        },
       ),
     );
   }
