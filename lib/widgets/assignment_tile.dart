@@ -5,6 +5,7 @@ import 'package:track_my_degree/models/subject.dart';
 import '../core/constants.dart';
 import '../core/utils.dart';
 import '../models/assignment.dart';
+import '../providers/assignment_provider.dart';
 import '../providers/subject_provider.dart';
 import 'progress_bar.dart';
 
@@ -35,13 +36,14 @@ class AssignmentTile extends ConsumerWidget {
           padding: const EdgeInsets.all(kDefaultPadding),
           child: Row(
             children: [
-              CircleAvatar(
-                backgroundColor:
-                    assignment.isCompleted ? kAccentGreen : kPrimaryBlue,
-                child: Icon(
-                  assignment.isCompleted ? Icons.check : Icons.assignment,
-                  color: Colors.white,
-                ),
+              Checkbox(
+                value: assignment.isCompleted,
+                activeColor: kAccentGreen,
+                onChanged: (value) {
+                  ref
+                      .read(assignmentProvider.notifier)
+                      .toggleCompletion(assignment.id);
+                },
               ),
               const SizedBox(width: kDefaultPadding),
               Expanded(
@@ -61,7 +63,8 @@ class AssignmentTile extends ConsumerWidget {
                       'Due: ${formatDate(assignment.dueDate)}',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color:
-                            assignment.dueDate.isBefore(DateTime.now())
+                            assignment.dueDate.isBefore(DateTime.now()) &&
+                                    !assignment.isCompleted
                                 ? Colors.redAccent
                                 : Colors.black54,
                       ),

@@ -19,7 +19,7 @@ class DbService {
     final path = join(directory.path, 'track_my_degree.db');
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE subjects (
@@ -52,9 +52,15 @@ class DbService {
           )
         ''');
       },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          await db.execute('ALTER TABLE subjects ADD COLUMN credits INTEGER');
+        }
+      },
     );
   }
 
+  // Subject operations
   Future<void> insertSubject(Subject subject) async {
     final db = await database;
     await db.insert(
@@ -70,6 +76,7 @@ class DbService {
     return maps.map((map) => Subject.fromMap(map)).toList();
   }
 
+  // Assignment operations
   Future<void> insertAssignment(Assignment assignment) async {
     final db = await database;
     await db.insert(
@@ -83,5 +90,26 @@ class DbService {
     final db = await database;
     final maps = await db.query('assignments');
     return maps.map((map) => Assignment.fromMap(map)).toList();
+  }
+
+  // Timetable operations
+  Future<void> insertTimetableEntry(TimetableEntry entry) async {
+    final db = await database;
+    await db.insert(
+      'timetable',
+      entry.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<TimetableEntry>> getTimetableEntries() async {
+    final db = await database;
+    final maps = await db.query('timetable');
+    return maps.map((map) => TimetableEntry.fromMap(map)).toList();
+  }
+
+  Future<void> deleteTimetableEntry(String id) async {
+    final db = await database;
+    await db.delete('timetable', where: 'id = ?', whereArgs: [id]);
   }
 }

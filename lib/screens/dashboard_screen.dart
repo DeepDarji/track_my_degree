@@ -89,8 +89,8 @@ class DashboardScreen extends ConsumerWidget {
                         const SubjectsScreen(),
                         const AssignmentsScreen(),
                         const TimetableScreen(),
-                        const AIScreen(),
                         const SettingsScreen(),
+                        const AIScreen(),
                       ][index],
             ),
           );
@@ -108,6 +108,10 @@ class DashboardScreen extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.schedule),
             label: 'Timetable',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'AI Buddy'),
         ],

@@ -1,5 +1,5 @@
 name: track_my_degree
-description: "A new Flutter project."
+description: "A Flutter app to help students track subjects, assignments, and study plans."
 
 publish_to: "none"
 version: 1.0.0+1
@@ -10,14 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_animate: ^4.5.2
-  cupertino_icons: ^1.0.8
   flutter_riverpod: ^2.6.1
   sqflite: ^2.3.0
   path_provider: ^2.1.5
-  intl: ^0.20.2
   google_fonts: ^6.2.1
+  flutter_animate: ^4.5.2
+  intl: ^0.20.2
   uuid: ^4.4.2
+  fl_chart: ^1.0.0
+  flutter_local_notifications: ^19.2.1
+  timezone: ^0.10.1
 
 dev_dependencies:
   flutter_test:

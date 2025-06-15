@@ -5,7 +5,9 @@ import '../core/utils.dart';
 import '../models/assignment.dart';
 import '../providers/assignment_provider.dart';
 import '../providers/subject_provider.dart';
+import '../services/notification_service.dart';
 import '../widgets/assignment_tile.dart';
+import 'settings_screen.dart';
 
 class AssignmentsScreen extends ConsumerWidget {
   const AssignmentsScreen({super.key});
@@ -14,6 +16,7 @@ class AssignmentsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final assignments = ref.watch(assignmentProvider);
     final subjects = ref.watch(subjectProvider);
+    final notificationsEnabled = ref.watch(notificationsEnabledProvider);
     final TextEditingController titleController = TextEditingController();
     String? selectedSubjectId;
     DateTime? selectedDate;
@@ -93,7 +96,7 @@ class AssignmentsScreen extends ConsumerWidget {
                       child: const Text('Cancel'),
                     ),
                     TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (selectedSubjectId != null && selectedDate != null) {
                           final assignment = Assignment(
                             id: const Uuid().v4(),
@@ -104,6 +107,20 @@ class AssignmentsScreen extends ConsumerWidget {
                           ref
                               .read(assignmentProvider.notifier)
                               .addAssignment(assignment);
+
+                          // Schedule notification if enabled
+                          if (notificationsEnabled) {
+                            final notificationService = NotificationService();
+                            await notificationService
+                                .scheduleAssignmentNotification(
+                                  id: assignment.id.hashCode,
+                                  title: 'Assignment Due: ${assignment.title}',
+                                  body:
+                                      'Due on ${formatDate(assignment.dueDate)}',
+                                  dueDate: assignment.dueDate,
+                                );
+                          }
+
                           Navigator.pop(context);
                         }
                       },
